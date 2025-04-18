@@ -181,6 +181,8 @@
         
         .image-link img {
             width: 100%;
+            max-width: 100%;
+            height: auto;
             border-radius: 12px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
@@ -249,6 +251,25 @@
             .card {
                 padding: 25px;
             }
+            
+            .image-link {
+                max-width: 90%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .image-link {
+                max-width: 100%;
+            }
+            
+            .pulse {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .play-icon {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
@@ -266,7 +287,7 @@
         
         <div class="card">
             <h1><span class="emoji">🎉</span> You're In! <span class="emoji">🎯</span></h1>
-            <h2>Watch This 3-Minute Video Now to See Spatky AI in Action!</h2>
+            <h2>Watch This 3-Minute Video Now to See Sparky AI in Action!</h2>
             
             <p class="video-cta">
                 <span class="highlight">This 3-Minute Overview Video Reveals EXACTLY How</span> 
@@ -274,7 +295,7 @@
                 <span class="emoji">🔥</span><span class="emoji">🚀</span>
             </p>
             
-            <a href="https://phghub.ai/mtg" class="https://github.com/MusaTheGiant/automate-your-recruiting--grow-your-team--without-chasing-anyone--2025-04-07-9lrtc/blob/main/TeamSparky.png" target="_blank" rel="noopener noreferrer">
+            <a href="https://phghub.ai/mtg" class="image-link" target="_blank" rel="noopener noreferrer">
                 <img src="https://github.com/MusaTheGiant/automate-your-recruiting--grow-your-team--without-chasing-anyone--2025-04-07-9lrtc/blob/main/TeamSparky.png?raw=true" alt="Sparky AI Team">
                 <div class="pulse">
                     <div class="play-icon">▶</div>

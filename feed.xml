@@ -1,1 +1,37 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sparky AI</title>
+    <description>Your Sparky AI website description</description>
+    <link>https://yourusername.github.io/your-repo-name/</link>
+    <atom:link href="https://yourusername.github.io/your-repo-name/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 23 Apr 2025 12:00:00 +0000</pubDate>
+    <lastBuildDate>Wed, 23 Apr 2025 12:00:00 +0000</lastBuildDate>
+    
+    <!-- First content item -->
+    <item>
+      <title>Your First Article Title</title>
+      <description><![CDATA[
+        <p>This is the content of your first article. You can include HTML formatting here.</p>
+        <p>Add paragraphs, links, and other content as needed.</p>
+      ]]></description>
+      <pubDate>Wed, 23 Apr 2025 10:00:00 +0000</pubDate>
+      <link>https://yourusername.github.io/your-repo-name/first-article.html</link>
+      <guid>https://yourusername.github.io/your-repo-name/first-article.html</guid>
+    </item>
+    
+    <!-- Second content item -->
+    <item>
+      <title>Your Second Article Title</title>
+      <description><![CDATA[
+        <p>This is the content of your second article.</p>
+        <p>You can add as much content as needed here.</p>
+      ]]></description>
+      <pubDate>Tue, 22 Apr 2025 14:00:00 +0000</pubDate>
+      <link>https://yourusername.github.io/your-repo-name/second-article.html</link>
+      <guid>https://yourusername.github.io/your-repo-name/second-article.html</guid>
+    </item>
+    
+    <!-- Add more items as needed -->
+  </channel>
+</rss>

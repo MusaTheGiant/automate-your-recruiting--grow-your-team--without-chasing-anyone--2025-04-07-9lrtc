@@ -72,10 +72,15 @@
                     <p class="text-gray-600">Contact us at: <a href="mailto:info@sparkyaitool.om" class="text-gray-900 hover:text-gray-700">info@sparkyaitool.om</a></p>
                 </div>
                 <div class="text-right">
-                    <p class="text-gray-600">&copy; 2024 SparkyAI Member. All rights reserved.</p>
+                    <p class="text-gray-600">&copy; <span id="current-year"></span> SparkyAI Member. All rights reserved.</p>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Set the current year dynamically
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

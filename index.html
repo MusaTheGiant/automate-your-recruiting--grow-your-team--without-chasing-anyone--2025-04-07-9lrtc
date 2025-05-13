@@ -58,14 +58,14 @@
             right: 15px;
             font-size: 24px;
             font-weight: bold;
-            color: #777;
+            color: #e53e3e; /* Changed to red color */
             cursor: pointer;
             transition: color 0.2s;
             z-index: 10;
         }
         
         .close-button:hover {
-            color: #333;
+            color: #c53030; /* Darker red on hover */
         }
         
         /* Form Styles */
@@ -151,6 +151,16 @@
             margin-top: 15px;
             font-size: 14px;
             color: #e74c3c;
+        }
+        
+        /* Exit Intent Modal Animation */
+        @keyframes exitIntentSlideIn {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .exit-intent-modal-content {
+            animation: exitIntentSlideIn 0.5s ease;
         }
         
         @media (max-width: 640px) {
@@ -352,44 +362,162 @@ A system that generates unlimited traffic and leads, follows up automatically, o
         </div>
     </div>
 
+    <!-- Exit Intent Modal -->
+    <div id="exitIntentModal" class="modal">
+        <div class="modal-content exit-intent-modal-content">
+            <span class="close-button" id="closeExitModal">&times;</span>
+            <div class="form-container">
+                <div class="header">
+                    <h2>🛑 <b>Wait! Don't miss this opportunity to transform your marketing strategy!</b></h2>
+                    <p class="mb-4 text-gray-700">Discover how Sparky AI can help you generate unlimited traffic, leads, and sales on autopilot!</p>
+                </div>
+                
+                <form id="exitLeadForm" method="POST" action="https://gogvo.com/subscribe.php">
+                    <input type="hidden" name="AffiliateName" value="realmtgNLS">
+                    <input type="hidden" name="CampaignCode" value="ysiLYhIatuEz">
+                    <input type="hidden" name="TrackParam" value="exit_intent">
+                    <input type="hidden" name="FormId" value="24670853">
+                    <!-- Redirects to thank you page immediately -->
+                    <input type="hidden" name="redirect" value="https://phghub.ai/funnel-welcome-home.php?id=mtg&thankyou=true">
+                    <!-- Ensures no double opt-in -->
+                    <input type="hidden" name="ConfirmRequired" value="no">
+                    
+                    <div class="form-group">
+                        <label for="exit-firstname">First Name</label>
+                        <input type="text" id="exit-firstname" name="FirstName" placeholder="Enter your first name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="exit-email">Email Address</label>
+                        <input type="email" id="exit-email" name="Email" placeholder="Enter your email address" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">✅ YES, I WANT TO LEARN MORE! 🚀</button>
+                    
+                    <p class="warning-text">⚠️ Check Spam, Promotions or Junk folder.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Set the current year dynamically for copyright
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
+        // Variables to track user interaction
+        let formShown = false;
+        let exitIntentShown = false;
+        let mouseLeftViewport = false;
+        
+        // Store session info
+        const sessionKey = 'sparkyAI_session';
+        
+        // Check if the session exists
+        const checkSession = () => {
+            return localStorage.getItem(sessionKey) === 'true';
+        };
+        
+        // Set the session
+        const setSession = () => {
+            localStorage.setItem(sessionKey, 'true');
+        };
+        
         // Modal functionality
-        const modal = document.getElementById("formModal");
+        const formModal = document.getElementById("formModal");
+        const exitIntentModal = document.getElementById("exitIntentModal");
         const headerCTA = document.getElementById("headerCTA");
         const footerCTA = document.getElementById("footerCTA");
         const closeModal = document.getElementById("closeModal");
+        const closeExitModal = document.getElementById("closeExitModal");
+        
+        // Function to open the regular form modal
+        const openFormModal = () => {
+            formModal.style.display = "flex";
+            document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+            formShown = true;
+        };
+        
+        // Function to open the exit intent modal
+        const openExitIntentModal = () => {
+            if (!formShown && !exitIntentShown && !checkSession()) {
+                exitIntentModal.style.display = "flex";
+                document.body.style.overflow = "hidden";
+                exitIntentShown = true;
+                setSession(); // Remember that we've shown the exit intent modal this session
+            }
+        };
         
         // Open modal when either CTA button is clicked
         headerCTA.addEventListener("click", function() {
-            modal.style.display = "flex";
-            document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+            openFormModal();
         });
         
         footerCTA.addEventListener("click", function() {
-            modal.style.display = "flex";
-            document.body.style.overflow = "hidden";
+            openFormModal();
         });
         
-        // Close modal functions
+        // Close regular modal function
         closeModal.addEventListener("click", function() {
-            modal.style.display = "none";
+            formModal.style.display = "none";
             document.body.style.overflow = "auto"; // Re-enable scrolling
+        });
+        
+        // Close exit intent modal function
+        closeExitModal.addEventListener("click", function() {
+            exitIntentModal.style.display = "none";
+            document.body.style.overflow = "auto";
         });
         
         // Close modal if clicked outside of modal content
         window.addEventListener("click", function(event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
+            if (event.target === formModal) {
+                formModal.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+            if (event.target === exitIntentModal) {
+                exitIntentModal.style.display = "none";
                 document.body.style.overflow = "auto";
             }
         });
         
         // Prevent form submission propagation to window click event
-        document.querySelector('.modal-content').addEventListener('click', function(event) {
-            event.stopPropagation();
+        document.querySelectorAll('.modal-content').forEach(modal => {
+            modal.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+        });
+        
+        // Exit intent detection
+        document.addEventListener('mouseleave', function(e) {
+            // If the mouse leaves the top of the viewport
+            if (e.clientY <= 0 && !mouseLeftViewport) {
+                mouseLeftViewport = true;
+                openExitIntentModal();
+            }
+        });
+        
+        // Reset mouseLeftViewport when mouse returns to the page
+        document.addEventListener('mouseenter', function() {
+            mouseLeftViewport = false;
+        });
+        
+        // For mobile, detect back button press or tab close intent
+        window.addEventListener('beforeunload', function(e) {
+            if (!formShown && !exitIntentShown && !checkSession()) {
+                // Modern browsers require interaction before beforeunload can show a dialog
+                // This won't actually show a dialog but can trigger our exit intent
+                openExitIntentModal();
+                
+                // We need to give the browser time to display our modal
+                // This is a bit hacky but necessary for the flow
+                const start = Date.now();
+                while (Date.now() - start < 100) {
+                    // This small delay gives the browser a chance to render the modal
+                }
+                
+                // Most browsers will ignore this and close anyway
+                return "Wait! Don't miss our special offer!";
+            }
         });
 
         // Remove tracking pixel that could be used for double opt-in
